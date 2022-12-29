@@ -115,7 +115,7 @@ function retry(func, attempts) {
       try {
         return func();
       } catch (error) {
-        console.log(error.name);
+        t += 0;
       }
     }
     return t - 1;
