@@ -369,8 +369,8 @@ function isBracketsBalanced(str) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 /**
@@ -385,8 +385,23 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  let index = 0;
+  let end = 0;
+  let flag = true;
+
+  while (flag) {
+    for (let i = 0; i < pathes.length; i += 1) {
+      if (pathes[0][index] !== pathes[i][index]) {
+        flag = false;
+      }
+    }
+    if (flag && pathes[0][index] === '/') {
+      end = index + 1;
+    }
+    index += 1;
+  }
+  return pathes[0].slice(0, end);
 }
 
 /**
@@ -407,8 +422,21 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  const arr = [];
+  for (let i = 0; i < m1.length; i += 1) {
+    arr[i] = [];
+  }
+  for (let i = 0; i < m2[0].length; i += 1) {
+    for (let j = 0; j < m1.length; j += 1) {
+      let sum = 0;
+      for (let m = 0; m < m2.length; m += 1) {
+        sum += m1[j][m] * m2[m][i];
+      }
+      arr[j][i] = sum;
+    }
+  }
+  return arr;
 }
 
 /**
@@ -441,8 +469,38 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  if (position[0][0]) {
+    if (
+      position[0][0] === position[1][1]
+      && position[0][0] === position[2][2]
+    ) {
+      return position[0][0];
+    }
+  }
+  if (position[0][2]) {
+    if (
+      position[0][2] === position[1][1]
+      && position[0][2] === position[2][0]
+    ) {
+      return position[0][2];
+    }
+  }
+  for (let i = 0; i < position.length; i += 1) {
+    if (position[i][0]) {
+      if (
+        position[i][0] === position[i][1]
+        && position[i][0] === position[i][2]
+      ) return position[i][0];
+    }
+    if (position[0][i]) {
+      if (
+        position[0][i] === position[1][i]
+        && position[0][i] === position[2][i]
+      ) return position[0][i];
+    }
+  }
+  return undefined;
 }
 
 module.exports = {
